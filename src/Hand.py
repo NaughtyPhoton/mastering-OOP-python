@@ -10,9 +10,12 @@ from Card import Card
 class Hand:
     """Hand with methods for playing Blackjack."""
 
-    def __init__(self, dealer_card: Card) -> None:
+    def __init__(self, dealer_card: Card, *cards: Card) -> None:
         self.dealer_card: Card = dealer_card
-        self.cards: List[Card] = []
+        self.cards = list(cards)
+
+    def card_append(self, card: Card) -> None:
+        self.cards.append(card)
 
     def hard_total(self) -> int:
         return sum(c.hard for c in self.cards)
