@@ -3,19 +3,14 @@
 Testing Suit and Card classes.
 """
 from Deck import Deck3 as Deck
-from GameStrategy import GameStrategy
-from Hand import Hand4 as Hand
+from Hand import Hand5 as Hand
 
 if __name__ == '__main__':
     deck = Deck(5)
     hand = Hand(deck.pop(), deck.pop(), deck.pop())
-    frozen_hand = Hand(hand)
-    split_1 = Hand(hand, deck.pop(), split=0)
-    split_2 = Hand(hand, deck.pop(), split=1)
+    split_1, split_2 = Hand.split(hand, deck.pop(), deck.pop())
+    frozen = Hand.freeze(split_1)
 
     print(split_1)
     print(split_2)
-
-    dumb = GameStrategy()
-
-    print('c')
+    print(frozen)

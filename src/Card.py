@@ -2,6 +2,7 @@
 """
 Card model.
 """
+from typing import Tuple
 
 from Suit import Suit
 
@@ -11,24 +12,19 @@ class Card:
     def __init__(self, rank: str, suit: Suit, hard: int, soft: int) -> None:
         self.rank = rank
         self.suit = suit
-        self.hard = hard
-        self.soft = soft
+        self.hard, self.soft = self._points()
 
-
-class NumberCard(Card):
-
-    def __init__(self, rank: int, suit: Suit) -> None:
-        super().__init__(str(rank), suit, rank, rank)
+    def _points(self) -> Tuple[int, int]:
+        return int(self.rank), int(self.rank)
 
 
 class AceCard(Card):
 
-    def __init__(self, rank: int, suit: Suit) -> None:
-        super().__init__('A', suit, 1, 11)
+    def _points(self) -> Tuple[int, int]:
+        return 1, 11
 
 
 class FaceCard(Card):
 
-    def __init__(self, rank: int, suit: Suit) -> None:
-        rank_str = {11: 'J', 12: 'Q', 13: 'K'}[rank]
-        super().__init__(rank_str, suit, 10, 10)
+    def _points(self) -> Tuple[int, int]:
+        return 10, 10
